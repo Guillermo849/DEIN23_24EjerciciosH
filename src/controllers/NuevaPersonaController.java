@@ -61,63 +61,63 @@ public class NuevaPersonaController {
 		stage.close();
     }
 
-    @FXML
-    void guardarPersona(ActionEvent event) {
-    	
-    	Image icono = new Image(Main.class.getResourceAsStream("/img/agenda.png"));
-    	
-    	/*
-    	 * Si algunos de los TextFields está vacio entonces saltará una Ventana 
-    	 * 	de Error con los campos NULL
-    	 * */
-    	if (tfNombre.getText().isEmpty() || tfApellidos.getText().isEmpty() || tfEdad.getText().isEmpty()) {
-    		Alert alertWindows = new Alert(Alert.AlertType.ERROR);
-    		
-    		Stage stage = (Stage) alertWindows.getDialogPane().getScene().getWindow();
-    		stage.getIcons().add(icono);
-    		
-    		alertWindows.setHeaderText(null);
-    		String mensaje = "";
-			if (tfNombre.getText().isEmpty()){
-				mensaje += "El campo Nombre es Obligatorio \n";
-			}
-			if (tfApellidos.getText().isEmpty()) {
-				mensaje += "El campo Apellidos es Obligatorio \n";
-			}
-			if (tfEdad.getText().isEmpty()) {
-				mensaje += "El campo Edad es Obligatorio \n";
-			}
-			if (!tfEdad.getText().matches("[0-9]*")) {
-				mensaje += "El campo Edad debe ser númerico \n";
-			}
-			
-			alertWindows.setContentText(mensaje);
-    		alertWindows.showAndWait();
-    	} else {
-    	/*
-    	 * Devolverá la información de la persona a la tabla de la ventana padre
-    	 * */
-    		Persona persona = new Persona(tfNombre.getText(),
-	    			tfApellidos.getText(),
-	                Integer.parseInt(tfEdad.getText()));
-    		
-    		/* Si la persona es null es que se va a añadir una persona nueva a la tabla
-        	 *   de lo contrario se estará modificando una persona ya existente */
-        	if (person == null) {
-        		nuevaPersona(persona);
-        	} else {
-        		modPersona(persona);
-        	}
-    		
-    		// Una vez guardada la persona se cerrara la ventana
-    		Node n = (Node) event.getSource();
-    		
-    		Stage stage = (Stage) n.getScene().getWindow();
-    		
-    		stage.close();
-    		
-    	}
-    }
+//    @FXML
+//    void guardarPersona(ActionEvent event) {
+//    	
+//    	Image icono = new Image(Main.class.getResourceAsStream("/img/agenda.png"));
+//    	
+//    	/*
+//    	 * Si algunos de los TextFields está vacio entonces saltará una Ventana 
+//    	 * 	de Error con los campos NULL
+//    	 * */
+//    	if (tfNombre.getText().isEmpty() || tfApellidos.getText().isEmpty() || tfEdad.getText().isEmpty()) {
+//    		Alert alertWindows = new Alert(Alert.AlertType.ERROR);
+//    		
+//    		Stage stage = (Stage) alertWindows.getDialogPane().getScene().getWindow();
+//    		stage.getIcons().add(icono);
+//    		
+//    		alertWindows.setHeaderText(null);
+//    		String mensaje = "";
+//			if (tfNombre.getText().isEmpty()){
+//				mensaje += "El campo Nombre es Obligatorio \n";
+//			}
+//			if (tfApellidos.getText().isEmpty()) {
+//				mensaje += "El campo Apellidos es Obligatorio \n";
+//			}
+//			if (tfEdad.getText().isEmpty()) {
+//				mensaje += "El campo Edad es Obligatorio \n";
+//			}
+//			if (!tfEdad.getText().matches("[0-9]*")) {
+//				mensaje += "El campo Edad debe ser númerico \n";
+//			}
+//			
+//			alertWindows.setContentText(mensaje);
+//    		alertWindows.showAndWait();
+//    	} else {
+//    	/*
+//    	 * Devolverá la información de la persona a la tabla de la ventana padre
+//    	 * */
+//    		Persona persona = new Persona(tfNombre.getText(),
+//	    			tfApellidos.getText(),
+//	                Integer.parseInt(tfEdad.getText()));
+//    		
+//    		/* Si la persona es null es que se va a añadir una persona nueva a la tabla
+//        	 *   de lo contrario se estará modificando una persona ya existente */
+//        	if (person == null) {
+//        		nuevaPersona(persona);
+//        	} else {
+//        		modPersona(persona);
+//        	}
+//    		
+//    		// Una vez guardada la persona se cerrara la ventana
+//    		Node n = (Node) event.getSource();
+//    		
+//    		Stage stage = (Stage) n.getScene().getWindow();
+//    		
+//    		stage.close();
+//    		
+//    	}
+//    }
     
     private void nuevaPersona(Persona newPersona) {
     	mainController.devolverPersonaNueva(newPersona);

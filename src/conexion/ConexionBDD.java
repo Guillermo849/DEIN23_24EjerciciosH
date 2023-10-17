@@ -7,15 +7,20 @@ import java.util.TimeZone;
 
 public class ConexionBDD {
     private Connection conexion;
-    public void ConexionDB() throws SQLException {
-        String baseDatos = "personas";
-        String host = "localhost";
-        String usuario = "user";
-        String password = "user";
-        String cadenaConexion = "jdbc:mysql://" + host + "/" + baseDatos+ "?serverTimezone=" + TimeZone.getDefault().getID();
-        conexion = DriverManager.getConnection(cadenaConexion, usuario, password);
-        conexion.setAutoCommit(true);
-
+    public ConexionBDD()  {
+    	try {
+    		String baseDatos = "personas";
+            String host = "localhost";
+            String usuario = "user3";
+            String password = "user3";
+            String cadenaConexion = "jdbc:mysql://" + host + "/" + baseDatos+ "?serverTimezone=" + TimeZone.getDefault().getID();
+            conexion = DriverManager.getConnection(cadenaConexion, usuario, password);
+            conexion.setAutoCommit(true);
+    	} catch (SQLException e) {
+			// TODO: handle exception
+    		e.printStackTrace();
+		}
+        
     }
     public Connection getConexion() {
         return conexion;

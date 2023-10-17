@@ -28,15 +28,13 @@ public class PersonasDao {
 				String nombre = rs.getString("nombre");
 				String apellidos = rs.getString("apellidos");
 				int edad = rs.getInt("edad");
-		        Persona a = new Persona(idPersona, nombre, apellidos, edad);
-				personas.add(a);
+		        Persona p = new Persona(idPersona, nombre, apellidos, edad);
+				personas.add(p);
 			}
 			rs.close();
 			conexion.CloseConexion();
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		} catch (SQLException e) {e.printStackTrace();}
 		return personas;
 	}
 	
