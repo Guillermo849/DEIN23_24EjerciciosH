@@ -1,9 +1,8 @@
-
 package controllers;
 
+/* Controlador de la ventana para añadir o modificar personas */
+
 import application.Main;
-import conexion.ConexionBDD;
-import dao.PersonasDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -39,14 +38,12 @@ public class NuevaPersonaController {
     
     private Persona person;
     
-    private PersonasDao personasDao;
-    
     private int idPersona;
     
-    public void setParent(TbPersonasController parent, Persona per, PersonasDao perDao) {
+    /* Establece cual es la ventana padre para que tengan conexión entre ellos */
+    public void setParent(TbPersonasController parent, Persona per) {
     	this.mainController = parent;
     	this.person = per;
-    	this.personasDao = perDao;
     	
     	if (person != null) {
     		
@@ -130,10 +127,12 @@ public class NuevaPersonaController {
     	}
     }
     
+    /* Devuelve una persona nueva */
     private void nuevaPersona(Persona newPersona) {
     	mainController.devolverPersonaNueva(newPersona);
     }
     
+    /* Devuelve una persona modificada */
     private void modPersona(Persona modPersona) {
     	mainController.devolverPersonaMod(modPersona);
     }

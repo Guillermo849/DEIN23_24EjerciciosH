@@ -1,5 +1,7 @@
 package model;
 
+/* Clase Persona */
+
 public class Persona {
 	
 	int id;

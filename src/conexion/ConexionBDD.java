@@ -1,5 +1,7 @@
 package conexion;
 
+/* Establece la conexion con la base de datos */
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;

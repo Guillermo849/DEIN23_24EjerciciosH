@@ -1,14 +1,9 @@
 package controllers;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
+/* Controlador de la ventana con la tabla de las personas */
+
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 import application.Main;
@@ -30,8 +25,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
 import model.Persona;
@@ -74,14 +67,16 @@ public class TbPersonasController implements Initializable {
 
 	// Vartiables de base de datos
 	private PersonasDao personasD;
-
+	
+	/* Selecciona la perosna en la tabla para que no haya NullPointerExceptions */
 	@FXML
 	void selectPersona(MouseEvent event) {
 		if (tbViewPersonas.getSelectionModel().getSelectedItem() != null) {
 			personaIndex = tbViewPersonas.getSelectionModel().getSelectedIndex();
 		}
 	}
-
+	
+	/* Añade una persona a la tabla y BDD */
 	@FXML
 	void aniadirPersona(ActionEvent event) {
 		try {
@@ -90,7 +85,7 @@ public class TbPersonasController implements Initializable {
 			Parent root = loader.load();
 			/* Le dice a la nueva ventana cual es su ventana padre */
 			newPersonaWindow = loader.getController();
-			newPersonaWindow.setParent(this, null, personasD);
+			newPersonaWindow.setParent(this, null);
 
 			Stage agregarStage = new Stage();
 			agregarStage.setScene(new Scene(root));
@@ -103,7 +98,8 @@ public class TbPersonasController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-
+	
+	/* Modifica una persona ya existente en la tabla */
 	@FXML
 	void modificarPersona(ActionEvent event) {
 		if (personaIndex > -1) {
@@ -112,7 +108,7 @@ public class TbPersonasController implements Initializable {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DatosPersonasAgregar.fxml"));
 				Parent root = loader.load();
 				newPersonaWindow = loader.getController();
-				newPersonaWindow.setParent(this, tbViewPersonas.getItems().get(personaIndex), personasD);
+				newPersonaWindow.setParent(this, tbViewPersonas.getItems().get(personaIndex));
 
 				Stage agregarStage = new Stage();
 				agregarStage.setScene(new Scene(root));
@@ -195,7 +191,8 @@ public class TbPersonasController implements Initializable {
 
 		}
 	}
-
+	
+	/* Inicializa la tabla y los datos de las personas de la BDD que contendrá la tabla */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 

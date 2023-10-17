@@ -1,10 +1,10 @@
 package dao;
 
-import java.sql.Connection;
+/* Controlador de acceso a datos de Personas, para guardar, modificar y/o eliminar de la base de datos */
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import conexion.ConexionBDD;
 import javafx.collections.FXCollections;
