@@ -42,19 +42,6 @@
                   <TableColumn fx:id="tbColEdad" maxWidth="239.0" minWidth="15.0" prefWidth="115.0" text="EDAD" />
               </columns>
             </TableView>
-            <HBox prefHeight="33.0" prefWidth="600.0">
-               <children>
-                  <Button fx:id="btnImportar" mnemonicParsing="false" onAction="#importarTabla" text="Importar">
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnExportar" mnemonicParsing="false" onAction="#exportarTabla" text="Exportar" />
-               </children>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-            </HBox>
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

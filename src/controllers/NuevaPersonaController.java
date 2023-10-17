@@ -1,5 +1,6 @@
-
 package controllers;
+
+/* Controlador de la ventana para añadir o modificar personas */
 
 import application.Main;
 import javafx.event.ActionEvent;
@@ -37,11 +38,17 @@ public class NuevaPersonaController {
     
     private Persona person;
     
+    private int idPersona;
+    
+    /* Establece cual es la ventana padre para que tengan conexión entre ellos */
     public void setParent(TbPersonasController parent, Persona per) {
     	this.mainController = parent;
     	this.person = per;
     	
     	if (person != null) {
+    		
+    		idPersona = per.getId();
+    		
     		tfNombre.setText(person.getNombre().toString());
         	
         	tfApellidos.setText(person.getApellido().toString());
@@ -106,6 +113,7 @@ public class NuevaPersonaController {
         	if (person == null) {
         		nuevaPersona(persona);
         	} else {
+        		persona.setId(idPersona);
         		modPersona(persona);
         	}
     		
@@ -119,10 +127,12 @@ public class NuevaPersonaController {
     	}
     }
     
+    /* Devuelve una persona nueva */
     private void nuevaPersona(Persona newPersona) {
     	mainController.devolverPersonaNueva(newPersona);
     }
     
+    /* Devuelve una persona modificada */
     private void modPersona(Persona modPersona) {
     	mainController.devolverPersonaMod(modPersona);
     }
