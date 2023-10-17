@@ -41,12 +41,17 @@ public class NuevaPersonaController {
     
     private PersonasDao personasDao;
     
+    private int idPersona;
+    
     public void setParent(TbPersonasController parent, Persona per, PersonasDao perDao) {
     	this.mainController = parent;
     	this.person = per;
     	this.personasDao = perDao;
     	
     	if (person != null) {
+    		
+    		idPersona = per.getId();
+    		
     		tfNombre.setText(person.getNombre().toString());
         	
         	tfApellidos.setText(person.getApellido().toString());
@@ -111,6 +116,7 @@ public class NuevaPersonaController {
         	if (person == null) {
         		nuevaPersona(persona);
         	} else {
+        		persona.setId(idPersona);
         		modPersona(persona);
         	}
     		

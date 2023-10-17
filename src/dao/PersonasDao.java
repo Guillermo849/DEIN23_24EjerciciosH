@@ -14,6 +14,7 @@ import model.Persona;
 public class PersonasDao {
 	private ConexionBDD conexion;
 	
+	/* Devuelve una lista de las personas almacenadas en la base de datos */
 	public ObservableList<Persona> cargarPersonas() {
 
 		ObservableList<Persona> personas = FXCollections.observableArrayList();
@@ -38,6 +39,7 @@ public class PersonasDao {
 		return personas;
 	}
 	
+	/* Insertará una nueva persona en la base de datos */
 	public void insertPersona(Persona persona) {
 		
 		String nom = persona.getNombre(); 
@@ -47,6 +49,42 @@ public class PersonasDao {
 		try {
 			conexion = new ConexionBDD();
 			String consulta = "INSERT INTO persona(nombre,apellidos,edad) VALUES('" + nom + "','" + ape + "',"  + eda+ ");";
+			PreparedStatement pstmt = conexion.getConexion().prepareStatement(consulta);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/* Modificará una persona de la base de datos */
+	public void modPersona(Persona persona) {
+		
+		String nom = persona.getNombre(); 
+		String ape = persona.getApellido();
+		int eda = persona.getEdad();
+		
+		try {
+			conexion = new ConexionBDD();
+			String consulta = "UPDATE persona SET nombre = '" + nom + "', apellidos = '" + ape + "', edad = '" + eda + "' WHERE id = " + persona.getId() + ";";
+			PreparedStatement pstmt = conexion.getConexion().prepareStatement(consulta);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/* Eliminará una persona en la base de datos*/
+	public void eliminarPersona(Persona persona) {
+		
+		int idPersona = persona.getId();
+		
+		try {
+			conexion = new ConexionBDD();
+			String consulta = "DELETE FROM persona WHERE id = " + idPersona + ";";
 			PreparedStatement pstmt = conexion.getConexion().prepareStatement(consulta);
 			pstmt.executeUpdate();
 			

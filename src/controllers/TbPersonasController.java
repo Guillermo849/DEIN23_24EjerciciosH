@@ -112,7 +112,7 @@ public class TbPersonasController implements Initializable {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DatosPersonasAgregar.fxml"));
 				Parent root = loader.load();
 				newPersonaWindow = loader.getController();
-//				newPersonaWindow.setParent(this, tbViewPersonas.getItems().get(personaIndex));
+				newPersonaWindow.setParent(this, tbViewPersonas.getItems().get(personaIndex), personasD);
 
 				Stage agregarStage = new Stage();
 				agregarStage.setScene(new Scene(root));
@@ -130,7 +130,9 @@ public class TbPersonasController implements Initializable {
 	@FXML
 	void eliminarPersona(ActionEvent event) {
 		if (personaIndex > -1) {
-			tbViewPersonas.getItems().remove(personaIndex);
+			Persona perEliminar = tbViewPersonas.getItems().get(personaIndex);
+			personasD.eliminarPersona(perEliminar);
+			tbViewPersonas.setItems(personasD.cargarPersonas());
 		}
 	}
 
@@ -149,8 +151,10 @@ public class TbPersonasController implements Initializable {
 	 * Añadirá la persona modificada a la tabla
 	 */
 	public void devolverPersonaMod(Persona person) {
-		tbViewPersonas.getItems().set(personaIndex, person);
-		originalLstPersona = tbViewPersonas.getItems();
+		personasD.modPersona(person);
+		
+		originalLstPersona = personasD.cargarPersonas();
+		tbViewPersonas.setItems(personasD.cargarPersonas());
 	}
 
 	/*
