@@ -38,11 +38,15 @@ public class PersonasDao {
 		return personas;
 	}
 	
-	public void insertPersona(String nom, String ape, int eda) {
+	public void insertPersona(Persona persona) {
+		
+		String nom = persona.getNombre(); 
+		String ape = persona.getApellido();
+		int eda = persona.getEdad();
 		
 		try {
 			conexion = new ConexionBDD();
-			String consulta = "INSERT INTO persona(nombre,apellidos,edad) VALUES(" + nom + "," + ape + ","  + eda+ ");";
+			String consulta = "INSERT INTO persona(nombre,apellidos,edad) VALUES('" + nom + "','" + ape + "',"  + eda+ ");";
 			PreparedStatement pstmt = conexion.getConexion().prepareStatement(consulta);
 			pstmt.executeUpdate();
 			

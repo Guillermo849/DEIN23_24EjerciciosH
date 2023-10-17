@@ -63,7 +63,7 @@ public class TbPersonasController implements Initializable {
 
 	@FXML
 	private TextField tfFiltroNombre;
-
+	
 	private NuevaPersonaController newPersonaWindow;
 
 	private static Image ICONO = new Image(Main.class.getResourceAsStream("/img/agenda.png"));
@@ -72,6 +72,7 @@ public class TbPersonasController implements Initializable {
 
 	private ObservableList<Persona> originalLstPersona;
 
+	// Vartiables de base de datos
 	private PersonasDao personasD;
 
 	@FXML
@@ -89,7 +90,7 @@ public class TbPersonasController implements Initializable {
 			Parent root = loader.load();
 			/* Le dice a la nueva ventana cual es su ventana padre */
 			newPersonaWindow = loader.getController();
-			newPersonaWindow.setParent(this, null);
+			newPersonaWindow.setParent(this, null, personasD);
 
 			Stage agregarStage = new Stage();
 			agregarStage.setScene(new Scene(root));
@@ -111,7 +112,7 @@ public class TbPersonasController implements Initializable {
 				FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DatosPersonasAgregar.fxml"));
 				Parent root = loader.load();
 				newPersonaWindow = loader.getController();
-				newPersonaWindow.setParent(this, tbViewPersonas.getItems().get(personaIndex));
+//				newPersonaWindow.setParent(this, tbViewPersonas.getItems().get(personaIndex));
 
 				Stage agregarStage = new Stage();
 				agregarStage.setScene(new Scene(root));
@@ -137,8 +138,11 @@ public class TbPersonasController implements Initializable {
 	 * Añade la informacion de la ventana DatosPersonasAgregarController a la tabla
 	 */
 	public void devolverPersonaNueva(Persona person) {
-		originalLstPersona.add(person);
-		tbViewPersonas.setItems(originalLstPersona);
+		
+		personasD.insertPersona(person);
+		
+		originalLstPersona = personasD.cargarPersonas();
+		tbViewPersonas.setItems(personasD.cargarPersonas());
 	}
 
 	/*

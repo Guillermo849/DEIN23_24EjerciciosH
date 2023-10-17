@@ -7,7 +7,14 @@ public class Persona {
 	String apellidos;
 	int edad;
 	
+	public Persona(String nom, String ape, int eda) {
+		nombre = nom;
+		apellidos = ape;
+		edad = eda;
+	}
+	
 	public Persona(int ID, String nom, String ape, int eda) {
+		this.id = ID;
 		nombre = nom;
 		apellidos = ape;
 		edad = eda;
