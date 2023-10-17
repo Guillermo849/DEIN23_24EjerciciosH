@@ -2,14 +2,23 @@ package model;
 
 public class Persona {
 	
+	int id;
 	String nombre;
 	String apellidos;
 	int edad;
 	
-	public Persona(String nom, String ape, int eda) {
+	public Persona(int ID, String nom, String ape, int eda) {
 		nombre = nom;
 		apellidos = ape;
 		edad = eda;
+	}
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
