@@ -11,7 +11,8 @@ import dao.PersonasDao;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -158,38 +159,16 @@ public class TbPersonasController implements Initializable {
 	 */
 	@FXML
 	void filtrarPorNombre(ActionEvent event) {
-
-		String nom = tfFiltroNombre.getText().toString();
-
-		if (nom != null) {
-			ObservableList<Persona> obLstPersonasFiltrado = FXCollections.observableArrayList();
-
-			for (Persona per : originalLstPersona) {
-
-				if (per.getNombre().length() >= nom.length()) {
-
-					boolean iguales = true;
-					char[] nomFiltro = nom.toCharArray();
-					char[] nomPersona = per.getNombre().toCharArray();
-
-					for (int i = 0; i < nomFiltro.length; i++) {
-						if (nomFiltro[i] != nomPersona[i]) {
-							iguales = false;
-							break;
-						}
-					}
-
-					if (iguales == true) {
-						obLstPersonasFiltrado.add(per);
-					}
-				}
-			}
-
-			if (!obLstPersonasFiltrado.isEmpty()) {
-				tbViewPersonas.setItems(obLstPersonasFiltrado);
-			}
-
-		}
+		
+		tfFiltroNombre.textProperty().addListener(e -> {
+            /* Creamos una FilteredList con los datos de la tabla */
+            FilteredList<Persona> filteredData = new FilteredList<Persona>(originalLstPersona);
+            /* Establecemos la regla del filtro: Si no contiene el texto en el textfield no se muestra */
+            filteredData.setPredicate(persona -> persona.getNombre().contains(tfFiltroNombre.getText()));
+            /* Ordenamos la lista con una SortedList*/
+            SortedList<Persona> filteredSortedData = new SortedList<Persona>(filteredData);
+            tbViewPersonas.setItems(filteredSortedData); // Añadimos la lista ordenada a la tabla
+        });;
 	}
 	
 	/* Inicializa la tabla y los datos de las personas de la BDD que contendrá la tabla */

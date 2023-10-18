@@ -14,7 +14,7 @@ public class Main extends Application {
 		try {
 			BorderPane root = FXMLLoader.load(getClass().getResource("/fxml/TbPersonas.fxml"));
 			Scene scene = new Scene(root,600,400);
-			scene.getStylesheets().add(getClass() .getResource("/css/application.css").toExternalForm());
+			scene.getStylesheets().add(getClass().getResource("/css/application.css").toExternalForm());
 			/*
 			 * Añadimos el Icono
 			 * */
